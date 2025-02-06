@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ro'yxatdan o'tish - Alixon's IT Site</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .signup-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .signup-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #4f46e5;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #4f46e5;
+            outline: none;
+        }
+
+        .signup-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .signup-button:hover {
+            background-color: #3740b4;
+        }
+
+        .login-link {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h2>Ro'yxatdan o'tish</h2>
+        <form action="#" method="POST">
+            <input type="text" class="input-field" placeholder="Foydalanuvchi ismi" required>
+            <input type="email" class="input-field" placeholder="Elektron pochta" required>
+            <input type="password" class="input-field" placeholder="Parol" required>
+            <input type="password" class="input-field" placeholder="Parolni tasdiqlash" required>
+            <button type="submit" class="signup-button">Ro'yxatdan o'tish</button>
+        </form>
+        <div class="login-link">
+            <p>Hisobingiz bormi? <a href="login.html">Kirish</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
