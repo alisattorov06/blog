@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sattorov Ali |Portfolio</title>
+    <link rel="icon" type="image/png" href="image/logo.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        dark: '#0f0f1b',
+                        neon: {
+                            blue: '#00f0ff',
+                            purple: '#b967ff',
+                            pink: '#ff00c8'
+                        }
+                    },
+                    animation: {
+                        'neon-pulse': 'neon-pulse 2s infinite alternate',
+                        'neon-flicker': 'neon-flicker 1.5s infinite alternate'
+                    },
+                    keyframes: {
+                        'neon-pulse': {
+                            '0%, 100%': { textShadow: '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00f0ff, 0 0 20px #00f0ff, 0 0 35px #00f0ff, 0 0 40px #00f0ff' },
+                            '50%': { textShadow: '0 0 2px #fff, 0 0 5px #fff, 0 0 8px #00f0ff, 0 0 10px #00f0ff, 0 0 15px #00f0ff, 0 0 20px #00f0ff' }
+                        },
+                        'neon-flicker': {
+                            '0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%': { opacity: 1, textShadow: '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #b967ff, 0 0 20px #b967ff, 0 0 35px #b967ff, 0 0 40px #b967ff' },
+                            '20%, 24%, 55%': { opacity: 0.8, textShadow: 'none' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f0f1b;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        .glass-navbar {
+            backdrop-filter: blur(10px);
+            background: rgba(15, 15, 27, 0.7);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .glass-navbar.scrolled {
+            background: rgba(15, 15, 27, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .gradient-btn {
+            background: linear-gradient(90deg, #00f0ff, #b967ff, #ff00c8);
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease infinite;
+            transition: all 0.3s ease;
+        }
+
+        .gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(185, 103, 255, 0.7),
+                0 0 25px rgba(0, 240, 255, 0.5),
+                0 0 35px rgba(255, 0, 200, 0.5);
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(185, 103, 255, 0.3);
+            border-color: #b967ff;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #00f0ff, #b967ff);
+            border-radius: 3px;
+        }
+
+        .hero-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 4rem;
+            line-height: 1.1;
+            background: linear-gradient(90deg, #00f0ff, #b967ff, #ff00c8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 300% 300%;
+            animation: neon-pulse 2s infinite alternate;
+        }
+
+        .vanta-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #00f0ff, #b967ff);
+        }
+
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="overflow-x-hidden">
+
+    <div id="vanta-bg" class="vanta-bg"></div>
+
+
+    <nav id="navbar" class="glass-navbar fixed w-full py-4 px-6 md:px-12 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">
+                <span class="text-gray-400">&lt;/&gt;</span> <span class="text-neon-blue">Sattorov </span><span
+                    class="text-neon-pink">ALI</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-neon-purple transition-colors">Men haqimda</a>
+                <a href="#skills" class="hover:text-neon-purple transition-colors">Ko'nikmalarim</a>
+                <a href="#projects" class="hover:text-neon-purple transition-colors">Loyihalarim</a>
+                <a href="#certificates" class="hover:text-neon-purple transition-colors">Sertifikatlarim</a>
+                <a href="#contact" class="hover:text-neon-purple transition-colors">Men bilan bog'laning</a>
+            </div>
+            <button id="menu-toggle" class="md:hidden text-neon-blue focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+  
+        <div id="mobile-menu" class="hidden md:hidden mt-4">
+            <div class="flex flex-col space-y-4 px-4 py-2 bg-dark/80 backdrop-blur-sm rounded-lg">
+                <a href="#about" class="hover:text-neon-purple transition-colors py-2">Men haqimda</a>
+                <a href="#skills" class="hover:text-neon-purple transition-colors py-2">Ko'nikmalarim</a>
+                <a href="#projects" class="hover:text-neon-purple transition-colors py-2">Loyihalarim</a>
+                <a href="#certificates" class="hover:text-neon-purple transition-colors py-2">Sertifikatlarim</a>
+                <a href="#contact" class="hover:text-neon-purple transition-colors py-2">Men bilan bog'laning</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <h1 class="hero-text mb-6">Frontend dasturchisi & Injiner</h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                Eng zamonaviy texnologiyalar va innovatsion dizayn yordamida immersiv raqamli tajribalarni yaratish.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#projects"
+                    class="gradient-btn px-8 py-3 rounded-full font-medium text-white shadow-lg hover:shadow-xl">
+                    Loyihalar
+                </a>
+                <a href="#contact"
+                    class="border-2 border-neon-blue px-8 py-3 rounded-full font-medium text-neon-blue hover:bg-neon-blue/10 transition-colors">
+                    Bog'lanish
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="about" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center"
+                style="font-family: 'Poppins', sans-serif;">Men haqimda</h2>
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/3 flex justify-center">
+                    <div class="relative">
+                        <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-neon-purple/30 card-hover">
+                            <div
+                                class="bg-gradient-to-br from-neon-blue/20 to-neon-pink/20 w-full h-full flex items-center justify-center">
+                                <div class="bg-gray-800 w-56 h-56 rounded-full flex items-center justify-center">
+                                    <span class="text-5xl font-bold text-neon-blue flex items-center justify-center">
+                                        <img src="image/avatar.jpg" alt="Mening suratim"
+                                            class="w-56 h-56 rounded-full object-cover">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h3 class="text-2xl font-bold mb-4" style="font-family: 'Poppins', sans-serif;">Frontend dasturchisi
+                        & Injiner</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Men Sattorov Alixon 2 yildan ortiq tajribaga ega frontend dasturchisiman.
+                        Men sizga shaxsiy portfolio, onlayn do'kon, maktablar uchun maxsus saytlarni mukammal va
+                        zamonaviy dizaynda tayyorlab bera olaman.
+                    </p>
+                    <p class="text-gray-300 mb-8 leading-relaxed">
+                        Bundan tashqari men kompyuterlarga servis va dasturiy xizmat ko'rsata olaman.Telefonlarni
+                        programmalashtirish,
+                        root huquqlarini o'rnatish, sozlash, har xil modlarni o'rnata olaman va ta'mirlay olaman.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-neon-blue mr-2"></div>
+                            <span>Frontend</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-neon-purple mr-2"></div>
+                            <span>Kompyuterlarga xizmat ko'rsatish</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-neon-pink mr-2"></div>
+                            <span>Telefonlarga dasturiy ta'minot ko'rsatish</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="skills" class="py-20 px-4 bg-dark/30">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center"
+                style="font-family: 'Poppins', sans-serif;">Ko'nikmalarim</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover">
+                    <h3 class="text-xl font-bold mb-6 text-neon-blue" style="font-family: 'Poppins', sans-serif;">
+                        Technical Expertise</h3>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>HTML</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[95%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>CSS</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[90%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>Java script</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[85%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>Python</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[80%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="bg-dark/50 p-6 rounded-xl border border-neon-purple/20 card-hover">
+                    <h3 class="text-xl font-bold mb-6 text-neon-purple" style="font-family: 'Poppins', sans-serif;">
+                        Dasturlar & Texnalogiyalar</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-neon-blue/10 text-neon-blue rounded-full">VS Code</span>
+                        <span class="px-4 py-2 bg-neon-purple/10 text-neon-purple rounded-full">Python</span>
+                        <span class="px-4 py-2 bg-neon-pink/10 text-neon-pink rounded-full">My SQL</span>
+                        <span class="px-4 py-2 bg-neon-blue/10 text-neon-blue rounded-full">Open AI ChatGPT</span>
+                        <span class="px-4 py-2 bg-neon-purple/10 text-neon-purple rounded-full">GPT 5 </span>
+                        <span class="px-4 py-2 bg-neon-pink/10 text-neon-pink rounded-full">GitHub</span>
+                        <span class="px-4 py-2 bg-neon-blue/10 text-neon-blue rounded-full">Tailwind CSS</span>
+                        <span class="px-4 py-2 bg-neon-purple/10 text-neon-purple rounded-full">Figma</span>
+                        <span class="px-4 py-2 bg-neon-pink/10 text-neon-pink rounded-full">Canva</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center"
+                style="font-family: 'Poppins', sans-serif;">Loyihalarim</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-dark/50 rounded-xl overflow-hidden border border-neon-blue/20 card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="image/xrom.png" alt="XROM Community" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">XROM Community</h3>
+                        <p class="text-gray-400 mb-4">XROM Community uchun tayyorlangan sayt demo versiyasi tez orada
+                            serverga qo'yiladi.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-neon-blue/10 text-neon-blue rounded">HTML</span>
+                            <span class="px-2 py-1 bg-neon-purple/10 text-neon-purple rounded">Tailwind CSS</span>
+                            <span class="px-2 py-1 bg-neon-pink/10 text-neon-pink rounded">JavaScript</span>
+                        </div>
+                        <a href="https://xrom.netlify.app/"
+                            class="text-neon-blue hover:text-neon-purple transition-colors flex items-center">
+                            Loyihani ko'rish
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- Project 2 -->
+                <div class="bg-dark/50 rounded-xl overflow-hidden border border-neon-blue/20 card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="image/shpzone.png" alt="XROM Community" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Onlayn do'kon</h3>
+                        <p class="text-gray-400 mb-4">Buyurtma asosida tayyorlangan onlayn do'kon demo versiyasi</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-neon-blue/10 text-neon-blue rounded">HTML</span>
+                            <span class="px-2 py-1 bg-neon-purple/10 text-neon-purple rounded">Tailwind CSS</span>
+                            <span class="px-2 py-1 bg-neon-pink/10 text-neon-pink rounded">JavaScript</span>
+                        </div>
+                        <a href="https://shpzone.netlify.app/"
+                            class="text-neon-blue hover:text-neon-purple transition-colors flex items-center">
+                            Loyihani ko'rish
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-20 px-4 bg-dark/30">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center"
+                style="font-family: 'Poppins', sans-serif;">Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Certificate 1 -->
+
+                <a href="https://coursera.org/verify/96ASISG3M2XG" target="_blank"
+                    class="block transition-transform hover:scale-105">
+                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="certificate_image/University Virginia The Economics of AI.png"
+                                alt="The Economics of AI" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">The Economics of AI</h3>
+                        <p class="text-gray-400 mb-4">University Virginia</p>
+                    </div>
+                </a>
+
+
+
+                <!-- Certificate 2 -->
+                <a href="https://coursera.org/verify/3RFGSPBT4H6I" target="_blank"
+                    class="block transition-transform hover:scale-105">
+                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="certificate_image/scrimba Build AI Apps with ChatGPT, Dall-E, and GPT-4.png"
+                                alt="The Economics of AI" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Scrimba</h3>
+                        <p class="text-gray-400 mb-4">Build AI Apps with ChatGPT</p>
+                    </div>
+                </a>
+
+                <!-- Certificate 3 -->
+                <a href="https://coursera.org/verify/ODNGF6C9RBDA" target="_blank"
+                    class="block transition-transform hover:scale-105">
+                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="certificate_image/certificat google sheets.png" alt="The Economics of AI"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Google</h3>
+                        <p class="text-gray-400 mb-4">Google Sheets</p>
+                    </div>
+                </a>
+
+                <!-- Certificate 4 -->
+                <a href="https://coursera.org/verify/NY98XMHCC3BP" target="_blank"
+                    class="block transition-transform hover:scale-105">
+                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="certificate_image/certificat google gmail.png" alt="The Economics of AI"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Google</h3>
+                        <p class="text-gray-400 mb-4">Google Gmail</p>
+                    </div>
+                </a>
+
+                <!-- Certificate 5 -->
+                <a href="https://coursera.org/verify/SXJDFDFEFCL0" target="_blank"
+                    class="block transition-transform hover:scale-105">
+                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="certificate_image/certificat google gemini.png" alt="The Economics of AI"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Google</h3>
+                        <p class="text-gray-400 mb-4">Google Gemini</p>
+                    </div>
+                </a>
+
+                <!-- Certificate 5 -->
+                <a href="https://coursera.org/verify/Z1VTH755S1FG" target="_blank"
+                    class="block transition-transform hover:scale-105">
+                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="certificate_image/certificat google drive.png" alt="The Economics of AI"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Google</h3>
+                        <p class="text-gray-400 mb-4">Google Drive</p>
+                    </div>
+                </a>
+
+                <!-- Certificate 6 -->
+                <a href="https://coursera.org/verify/XC2LWY41LSRR" target="_blank"
+                    class="block transition-transform hover:scale-105">
+                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="certificate_image/certificat google docs.png" alt="The Economics of AI"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Google</h3>
+                        <p class="text-gray-400 mb-4">Google Docs</p>
+                    </div>
+                </a>
+
+                <!-- Certificate 7 -->
+                <a href="https://coursera.org/verify/A1ORC0TNCAXA" target="_blank"
+                    class="block transition-transform hover:scale-105">
+                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="certificate_image/certificat google calendar.png" alt="The Economics of AI"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Google</h3>
+                        <p class="text-gray-400 mb-4">Google Calendar</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center"
+                style="font-family: 'Poppins', sans-serif;">Menga xabar qoldiring</h2>
+
+            <div class="bg-dark/50 p-8 rounded-xl border border-neon-blue/20">
+                <!-- ✅ FORM ACTION QO‘SHILDI -->
+                <form action="https://formspree.io/f/mwprnddl" method="POST" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block mb-2 text-gray-300">Ism</label>
+                            <input type="text" id="name" name="name"
+                                class="w-full bg-dark/70 border border-neon-blue/30 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent transition"
+                                placeholder="Your name" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-2 text-gray-300">Email</label>
+                            <input type="email" id="email" name="email"
+                                class="w-full bg-dark/70 border border-neon-blue/30 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent transition"
+                                placeholder="your.email@example.com" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="subject" class="block mb-2 text-gray-300">Mavzu</label>
+                        <input type="text" id="subject" name="subject"
+                            class="w-full bg-dark/70 border border-neon-blue/30 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent transition"
+                            placeholder="Project inquiry">
+                    </div>
+
+                    <div>
+                        <label for="message" class="block mb-2 text-gray-300">Xabar</label>
+                        <textarea id="message" name="message" rows="5"
+                            class="w-full bg-dark/70 border border-neon-blue/30 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent transition"
+                            placeholder="Xabaringizni qoldiring..." required></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="gradient-btn w-full py-3 rounded-lg font-medium text-white shadow-lg hover:shadow-xl">
+                        Xabar jo'natish
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+    <footer class="py-10 px-4 border-t border-neon-blue/20">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">
+                        <span class="text-neon-blue">Sattorov </span><span class="text-neon-pink">ALI</span>
+                    </div>
+                    <p class="text-gray-500 mt-2">Muhim raqamli tajribalarni yaratish</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://t.me/Syntax_Ali" class="social-icon text-neon-blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M9.999 15.2l-.398 5.6c.568 0 .815-.244 1.109-.535l2.66-2.523 5.518 4.016c1.012.557 1.732.263 1.993-.94l3.613-16.94.002-.001c.319-1.493-.537-2.08-1.527-1.716l-21.333 8.23c-1.453.566-1.433 1.38-.248 1.742l5.45 1.7 12.647-7.963c.595-.36 1.14-.162.692.198l-10.879 9.136z" />
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com/_sattorov_ali" class="social-icon text-neon-pink">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.333 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.069 1.646.069 4.851s-.011 3.584-.069 4.85c-.062 1.366-.333 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.069-4.85.069s-3.584-.011-4.85-.069c-1.366-.062-2.633-.333-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.333-2.633 1.308-3.608C4.516 2.566 5.783 2.295 7.15 2.233 8.416 2.175 8.796 2.163 12 2.163zm0 1.838c-3.162 0-3.532.011-4.778.069-1.077.049-1.668.229-2.059.382-.519.202-.888.444-1.277.833-.389.389-.631.758-.833 1.277-.153.391-.333.982-.382 2.059-.058 1.246-.069 1.616-.069 4.778s.011 3.532.069 4.778c.049 1.077.229 1.668.382 2.059.202.519.444.888.833 1.277.389.389.758.631 1.277.833.391.153.982.333 2.059.382 1.246.058 1.616.069 4.778.069s3.532-.011 4.778-.069c1.077-.049 1.668-.229 2.059-.382.519-.202.888-.444 1.277-.833.389-.389.631-.758.833-1.277.153-.391.333-.982.382-2.059.058-1.246.069-1.616.069-4.778s-.011-3.532-.069-4.778c-.049-1.077-.229-1.668-.382-2.059a3.554 3.554 0 0 0-.833-1.277 3.554 3.554 0 0 0-1.277-.833c-.391-.153-.982-.333-2.059-.382-1.246-.058-1.616-.069-4.778-.069zm0 3.905a5.932 5.932 0 1 1 0 11.865 5.932 5.932 0 0 1 0-11.865zm0 9.79a3.858 3.858 0 1 0 0-7.716 3.858 3.858 0 0 0 0 7.716zm6.406-10.845a1.386 1.386 0 1 1 0-2.772 1.386 1.386 0 0 1 0 2.772z" />
+                        </svg>
+                    </a>
+                    <a href="https://github.com/alisattorov06" class="social-icon text-neon-purple">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.034-1.416-4.034-1.416-.546-1.387-1.334-1.756-1.334-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.493.997.108-.775.418-1.305.762-1.604-2.666-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 0 1 6.002 0c2.293-1.552 3.301-1.23 3.301-1.23.653 1.653.241 2.874.118 3.176.77.84 1.236 1.911 1.236 3.221 0 4.609-2.804 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 22.092 24 17.594 24 12.297c0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                    <a href="https://youtube.com/@unofficial_phone" class="social-icon text-neon-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M23.499 6.203a2.998 2.998 0 0 0-2.113-2.118C19.548 3.5 12 3.5 12 3.5s-7.548 0-9.386.585A2.998 2.998 0 0 0 .5 6.203 31.991 31.991 0 0 0 0 12a31.991 31.991 0 0 0 .5 5.797 2.998 2.998 0 0 0 2.114 2.118C4.452 20.5 12 20.5 12 20.5s7.548 0 9.386-.585a2.998 2.998 0 0 0 2.113-2.118A31.991 31.991 0 0 0 24 12a31.991 31.991 0 0 0-.501-5.797zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+            <div class="mt-10 text-center text-gray-500 text-sm">
+                <p>© 2025. Sattorov ALI| Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.VANTA) {
+                VANTA.WAVES({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x0f0f1b,
+                    shininess: 20.00,
+                    waveHeight: 20.00,
+                    waveSpeed: 1.00
+                });
+            }
+
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>
