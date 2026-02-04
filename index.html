@@ -4,136 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sattorov Ali |Portfolio</title>
-    <link rel="icon" type="image/png" href="image/logo.png">
+    <title>Premium Portfolio - Developer</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        poppins: ['Poppins', 'sans-serif'],
-                        inter: ['Inter', 'sans-serif']
-                    },
-                    colors: {
-                        dark: '#0f0f1b',
-                        neon: {
-                            blue: '#00f0ff',
-                            purple: '#b967ff',
-                            pink: '#ff00c8'
-                        }
-                    },
-                    animation: {
-                        'neon-pulse': 'neon-pulse 2s infinite alternate',
-                        'neon-flicker': 'neon-flicker 1.5s infinite alternate'
-                    },
-                    keyframes: {
-                        'neon-pulse': {
-                            '0%, 100%': { textShadow: '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00f0ff, 0 0 20px #00f0ff, 0 0 35px #00f0ff, 0 0 40px #00f0ff' },
-                            '50%': { textShadow: '0 0 2px #fff, 0 0 5px #fff, 0 0 8px #00f0ff, 0 0 10px #00f0ff, 0 0 15px #00f0ff, 0 0 20px #00f0ff' }
-                        },
-                        'neon-flicker': {
-                            '0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%': { opacity: 1, textShadow: '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #b967ff, 0 0 20px #b967ff, 0 0 35px #b967ff, 0 0 40px #b967ff' },
-                            '20%, 24%, 55%': { opacity: 0.8, textShadow: 'none' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: rgba(0, 0, 0, 0.3);
+            --accent-primary: #00d4ff;
+            --accent-secondary: #b366ff;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f0f1b;
-            color: #e2e8f0;
+            font-family: 'Outfit', sans-serif;
+            background: #0a0a0f;
+            color: var(--text-primary);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        .glass-navbar {
-            backdrop-filter: blur(10px);
-            background: rgba(15, 15, 27, 0.7);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-        }
-
-        .glass-navbar.scrolled {
-            background: rgba(15, 15, 27, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .gradient-btn {
-            background: linear-gradient(90deg, #00f0ff, #b967ff, #ff00c8);
-            background-size: 200% 200%;
-            animation: gradient-shift 3s ease infinite;
-            transition: all 0.3s ease;
-        }
-
-        .gradient-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(185, 103, 255, 0.7),
-                0 0 25px rgba(0, 240, 255, 0.5),
-                0 0 35px rgba(255, 0, 200, 0.5);
-        }
-
-        @keyframes gradient-shift {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(185, 103, 255, 0.3);
-            border-color: #b967ff;
-        }
-
-        .section-title {
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
+        /* Animated space background */
+        .space-bg {
+            position: fixed;
+            top: 0;
             left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, #00f0ff, #b967ff);
-            border-radius: 3px;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse at top, rgba(0, 212, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at bottom right, rgba(179, 102, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at left, rgba(0, 150, 255, 0.08) 0%, transparent 40%),
+                #0a0a0f;
         }
 
-        .hero-text {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 4rem;
-            line-height: 1.1;
-            background: linear-gradient(90deg, #00f0ff, #b967ff, #ff00c8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            background-size: 300% 300%;
-            animation: neon-pulse 2s infinite alternate;
-        }
-
-        .vanta-bg {
+        .stars {
             position: fixed;
             top: 0;
             left: 0;
@@ -142,596 +59,1557 @@
             z-index: -1;
         }
 
-        .social-icon {
-            transition: all 0.3s ease;
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
         }
 
-        .social-icon:hover {
-            transform: translateY(-3px);
-            filter: drop-shadow(0 0 8px currentColor);
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
-        .skill-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+        /* Floating capsule header */
+        header {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .header-capsule {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            padding: 0.75rem 1.5rem;
+            box-shadow:
+                0 8px 32px var(--glass-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .header-capsule:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 12px 48px var(--glass-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                0 0 60px rgba(0, 212, 255, 0.15);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-pill {
+            padding: 0.5rem 1.25rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
             overflow: hidden;
         }
 
-        .skill-progress {
+        .nav-pill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            border-radius: 4px;
-            background: linear-gradient(90deg, #00f0ff, #b967ff);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-pill span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-pill i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-pill .nav-text {
+            display: inline;
+        }
+
+        .nav-pill:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-pill:hover::before {
+            opacity: 0.15;
+        }
+
+        .nav-pill.active {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(179, 102, 255, 0.2));
+            border-color: rgba(0, 212, 255, 0.4);
+            color: var(--text-primary);
+        }
+
+        /* Main content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12rem 2rem 4rem;
+        }
+
+        /* Hero section */
+        .hero {
+            margin-bottom: 8rem;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-left {
+            flex-shrink: 0;
+        }
+
+        .hero-right {
+            flex: 1;
+            text-align: left;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Avatar */
+        .avatar-container {
+            margin-bottom: 0;
+            display: flex;
+            justify-content: center;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 180px;
+            height: 180px;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            padding: 4px;
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .avatar-ring::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            filter: blur(20px);
+            opacity: 0.5;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #0a0a0f;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(179, 102, 255, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(0, 212, 255, 0);
+            }
+        }
+
+        /* Personal Info Section */
+        .personal-info {
+            max-width: 800px;
+            margin: 6rem auto;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.08) 0%,
+                    rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            border-radius: 32px;
+            padding: 3rem;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(179, 102, 255, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .bio-text {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin: 0 0 2.5rem 0;
+            line-height: 1.8;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Glass cards section */
+        .section {
+            margin-bottom: 6rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.08) 0%,
+                    rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            border-radius: 32px;
+            padding: 2.5rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle,
+                    rgba(0, 212, 255, 0.15) 0%,
+                    rgba(179, 102, 255, 0.1) 50%,
+                    transparent 70%);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: liquidFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes liquidFloat {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(10px, -10px) rotate(5deg);
+            }
+
+            66% {
+                transform: translate(-10px, 10px) rotate(-5deg);
+            }
+        }
+
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(0, 212, 255, 0.2),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+            transform: translate(0, 0) rotate(0deg);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(179, 102, 255, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Projects section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.08) 0%,
+                    rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            border-radius: 32px;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle,
+                    rgba(0, 212, 255, 0.12) 0%,
+                    rgba(179, 102, 255, 0.08) 50%,
+                    transparent 70%);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(0, 212, 255, 0.2),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(179, 102, 255, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 0.35rem 0.9rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .project-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 0.75rem;
+        }
+
+        /* Stats section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.08) 0%,
+                    rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            border-radius: 32px;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 80px rgba(0, 212, 255, 0.2),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .contact-item {
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.08) 0%,
+                    rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            border-radius: 28px;
+            padding: 1.5rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 80px rgba(0, 212, 255, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(179, 102, 255, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details {
+            text-align: left;
+        }
+
+        .contact-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-value {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 1.25rem;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
-            .hero-text {
+            header {
+                top: auto;
+                bottom: 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(20px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+
+            .header-capsule {
+                background: linear-gradient(135deg,
+                        rgba(255, 255, 255, 0.1) 0%,
+                        rgba(255, 255, 255, 0.05) 100%);
+                backdrop-filter: blur(40px) saturate(200%);
+                -webkit-backdrop-filter: blur(40px) saturate(200%);
+                border: 1.5px solid rgba(255, 255, 255, 0.2);
+                border-radius: 30px;
+                padding: 0.6rem 1rem;
+                gap: 0.5rem;
+                box-shadow:
+                    0 10px 40px rgba(0, 0, 0, 0.5),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+                    inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+            }
+
+            .header-capsule:hover {
+                transform: translateY(-4px);
+            }
+
+            .logo {
+                display: none;
+            }
+
+            nav {
+                gap: 0.3rem;
+            }
+
+            .nav-pill {
+                padding: 0.7rem;
+                min-width: 48px;
+                height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: transparent;
+                border: none;
+                border-radius: 18px;
+            }
+
+            .nav-pill.active {
+                background: linear-gradient(135deg,
+                        rgba(0, 212, 255, 0.25),
+                        rgba(179, 102, 255, 0.25));
+                box-shadow:
+                    0 4px 15px rgba(0, 212, 255, 0.4),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            }
+
+            .nav-pill .nav-text {
+                display: none;
+            }
+
+            .nav-pill i {
+                font-size: 1.2rem;
+            }
+
+            main {
+                padding: 2rem 1.5rem 8rem;
+            }
+
+            /* Hero mobile - stack vertically */
+            .hero-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-right {
+                text-align: center;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+
+            /* Avatar mobile */
+            .avatar-wrapper {
+                width: 130px;
+                height: 130px;
+            }
+
+            .avatar {
+                font-size: 3rem;
+            }
+
+            h1 {
                 font-size: 2.5rem;
             }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            /* Personal Info mobile */
+            .personal-info {
+                margin: 4rem auto;
+            }
+
+            .info-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .bio-text {
+                font-size: 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .project-image {
+                height: 120px;
+                font-size: 1.8rem;
+            }
+
+            .project-content {
+                padding: 1rem;
+            }
+
+            .project-tags {
+                gap: 0.3rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .tag {
+                padding: 0.25rem 0.6rem;
+                font-size: 0.65rem;
+            }
+
+            .project-title {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+                line-height: 1.3;
+            }
+
+            .project-description {
+                font-size: 0.8rem;
+                margin-bottom: 1rem;
+                line-height: 1.5;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .project-link {
+                font-size: 0.85rem;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Glow effect on scroll */
+        .glow-effect {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            transition: transform 0.2s ease-out;
+            z-index: -1;
         }
     </style>
 </head>
 
-<body class="overflow-x-hidden">
+<body>
+    <!-- Space background with stars -->
+    <div class="space-bg"></div>
+    <div class="stars" id="stars"></div>
+    <div class="glow-effect" id="glowEffect"></div>
 
-    <div id="vanta-bg" class="vanta-bg"></div>
-
-
-    <nav id="navbar" class="glass-navbar fixed w-full py-4 px-6 md:px-12 z-50 transition-all duration-300">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">
-                <span class="text-gray-400">&lt;/&gt;</span> <span class="text-neon-blue">Sattorov </span><span
-                    class="text-neon-pink">ALI</span>
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="hover:text-neon-purple transition-colors">Men haqimda</a>
-                <a href="#skills" class="hover:text-neon-purple transition-colors">Ko'nikmalarim</a>
-                <a href="#projects" class="hover:text-neon-purple transition-colors">Loyihalarim</a>
-                <a href="#certificates" class="hover:text-neon-purple transition-colors">Sertifikatlarim</a>
-                <a href="#contact" class="hover:text-neon-purple transition-colors">Men bilan bog'laning</a>
-            </div>
-            <button id="menu-toggle" class="md:hidden text-neon-blue focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
+    <!-- Floating capsule header -->
+    <header>
+        <div class="header-capsule">
+            <div class="logo">SATTOROV</div>
+            <nav>
+                <a href="#home" class="nav-pill active" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-text">Home</span>
+                </a>
+                <a href="#work" class="nav-pill" data-section="work">
+                    <i class="fas fa-briefcase"></i>
+                    <span class="nav-text">Work</span>
+                </a>
+                <a href="#about" class="nav-pill" data-section="about">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-text">About</span>
+                </a>
+                <a href="#contact" class="nav-pill" data-section="contact">
+                    <i class="fas fa-envelope"></i>
+                    <span class="nav-text">Contact</span>
+                </a>
+            </nav>
         </div>
-  
-        <div id="mobile-menu" class="hidden md:hidden mt-4">
-            <div class="flex flex-col space-y-4 px-4 py-2 bg-dark/80 backdrop-blur-sm rounded-lg">
-                <a href="#about" class="hover:text-neon-purple transition-colors py-2">Men haqimda</a>
-                <a href="#skills" class="hover:text-neon-purple transition-colors py-2">Ko'nikmalarim</a>
-                <a href="#projects" class="hover:text-neon-purple transition-colors py-2">Loyihalarim</a>
-                <a href="#certificates" class="hover:text-neon-purple transition-colors py-2">Sertifikatlarim</a>
-                <a href="#contact" class="hover:text-neon-purple transition-colors py-2">Men bilan bog'laning</a>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <!-- Avatar - Left Side -->
+                <div class="hero-left">
+                    <div class="avatar-container">
+                        <div class="avatar-wrapper">
+                            <div class="avatar-ring"></div>
+                            <div class="avatar">
+                                <img src="avatar.jpg" alt="Your Name" class="avatar">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content - Right Side -->
+                <div class="hero-right">
+                    <div class="hero-tag">✦ Available for new projects</div>
+                    <h1>Crafting Digital<br>Experiences</h1>
+                    <p class="hero-subtitle">
+                        Full-stack developer specializing in building exceptional digital products
+                        with modern technologies and innovative solutions.
+                    </p>
+                    <div class="cta-group">
+                        <a href="#contact" class="btn btn-primary">Start a Project</a>
+                        <a href="#work" class="btn btn-secondary">View Work</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal Info Section -->
+        <section class="personal-info">
+            <div class="info-card">
+                <h2 class="section-title" style="margin-bottom: 1.5rem; font-size: 2rem;">About Me</h2>
+                <p class="bio-text">
+                    Men Sattorov Alixon 2 yildan ortiq tajribaga ega frontend dasturchisiman.
+                    Men sizga shaxsiy portfolio, onlayn do'kon, maktablar uchun maxsus saytlarni mukammal va
+                    zamonaviy dizaynda tayyorlab bera olaman.Bundan tashqari men kompyuterlarga servis va dasturiy
+                    xizmat ko'rsata olaman.Telefonlarni
+                    programmalashtirish,
+                    root huquqlarini o'rnatish, sozlash, har xil modlarni o'rnata olaman va ta'mirlay olaman.
+                </p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="info-label">Ta'lim</div>
+                        <div class="info-value">FSTU, Kompyuter injinering</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-laptop-code"></i></div>
+                        <div class="info-label">Kasb</div>
+                        <div class="info-value">Fronted Developer</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-microchip"></i></div>
+                        <div class="info-label">Ko'nikma</div>
+                        <div class="info-value">AI engineer</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="info-label">Joylashuv</div>
+                        <div class="info-value">Farg'ona shahar, O'zbekiston</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">35+</div>
+                <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Satisfaction Rate</div>
             </div>
         </div>
-    </nav>
 
+        <!-- Services Section -->
+        <section class="section" id="about">
+            <h2 class="section-title">What I Do</h2>
+            <div class="cards-grid">
+                <div class="glass-card">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3 class="card-title">Web Development</h3>
+                    <p class="card-description">
+                        Zamonaviy texnologiyalar asosida tezkor va moslashuvchan web ilovalarni ishlab chiqaman,
+                        g‘oyadan to ishga tushirishgacha.
+                    </p>
+                </div>
+                <div class="glass-card">
+                    <div class="card-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+                    <h3 class="card-title">Computer & Mobile Engineer</h3>
+                    <p class="card-description">
+                        Kompyuter, noutbuk va mobil telefonlarga texnik xizmat ko‘rsataman: diagnostika,
+                        operatsion tizim va dasturiy ta’minotni o‘rnatish, nosozliklarni bartaraf etish,
+                        qurilmalarni sozlash va optimallashtirish.
+                    </p>
+                </div>
+                <div class="glass-card">
+                    <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                    <h3 class="card-title">AI Engineer</h3>
+                    <p class="card-description">
+                        Sun’iy intellekt va mashinaviy o‘rganish modellari asosida tizimlarni ishlab chiqaman,
+                        optimallashtiraman va real loyihalarga joriy qilaman.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-    <section class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-        <div class="max-w-4xl mx-auto text-center z-10">
-            <h1 class="hero-text mb-6">Frontend dasturchisi & Injiner</h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                Eng zamonaviy texnologiyalar va innovatsion dizayn yordamida immersiv raqamli tajribalarni yaratish.
+        <!-- Projects Section -->
+        <section class="section" id="work">
+            <h2 class="section-title">Featured Work</h2>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image"><img src="image/xrom.png" alt="XROM Community"></div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Tailwind CSS</span>
+                        </div>
+                        <h3 class="project-title">XROM Community</h3>
+                        <p class="project-description">
+                            XROM Community uchun tayyorlangan sayt demo versiyasi tez orada
+                            serverga qo'yiladi.
+                        </p>
+                        <a href="https://xrom.netlify.app/" class="project-link">
+                            View Case Study →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"><img src="image/shpzone.png" alt="shpzone"></div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Tailwind CSS</span>
+                        </div>
+                        <h3 class="project-title">Onlayn do'kon</h3>
+                        <p class="project-description">
+                            Buyurtma asosida tayyorlangan onlayn do'kon demo versiyasi
+                        </p>
+                        <a href="https://shpzone.netlify.app/" class="project-link">
+                            View Case Study →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"><img src="image/edulytics.png" alt="Edulytics"></div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Tailwind CSS</span>
+                            <span class="tag">React</span>
+                        </div>
+                        <h3 class="project-title">Edulytics</h3>
+                        <p class="project-description">
+                            O'quv markazlarni raqamlashtirishga qaratilgan platforma
+                        </p>
+                        <a href="https://edulyticsuz.netlify.app/" class="project-link">
+                            View Case Study →
+                        </a>
+                    </div>
+                </div>
+
+         <!--     <div class="project-card">
+                    <div class="project-image">💼</div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                        <h3 class="project-title">Task Manager</h3>
+                        <p class="project-description">
+                            Collaborative task management with real-time sync and notifications.
+                        </p>
+                        <a href="#" class="project-link">
+                            View Case Study →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🎮</div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                        </div>
+                        <h3 class="project-title">Mobile Game</h3>
+                        <p class="project-description">
+                            Engaging mobile game with 100K+ downloads and in-app purchases.
+                        </p>
+                        <a href="#" class="project-link">
+                            View Case Study →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🏪</div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">WordPress</span>
+                            <span class="tag">WooCommerce</span>
+                        </div>
+                        <h3 class="project-title">Online Store</h3>
+                        <p class="project-description">
+                            Custom WordPress theme with advanced ecommerce functionality.
+                        </p>
+                        <a href="#" class="project-link">
+                            View Case Study →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">📊</div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Django</span>
+                        </div>
+                        <h3 class="project-title">Data Platform</h3>
+                        <p class="project-description">
+                            Big data analytics platform processing millions of records daily.
+                        </p>
+                        <a href="#" class="project-link">
+                            View Case Study →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🎓</div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Angular</span>
+                            <span class="tag">MongoDB</span>
+                        </div>
+                        <h3 class="project-title">Learning Platform</h3>
+                        <p class="project-description">
+                            E-learning system with video courses, quizzes, and certificates.
+                        </p>
+                        <a href="#" class="project-link">
+                            View Case Study →
+                        </a>
+                    </div>
+                </div>
+            </div> -->
+        </section> 
+
+        <!-- Contact Section -->
+        <section class="section contact-section" id="contact">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="hero-subtitle" style="margin-bottom: 2rem;">
+                Feel free to reach out through any of these channels. I'm always open to discussing new projects and
+                opportunities.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#projects"
-                    class="gradient-btn px-8 py-3 rounded-full font-medium text-white shadow-lg hover:shadow-xl">
-                    Loyihalar
+
+            <div class="contact-info">
+                <a href="https://github.com/alisattorov06" class="contact-item" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">GitHub</span>
+                        <span class="contact-value">@alisattorov06</span>
+                    </div>
                 </a>
-                <a href="#contact"
-                    class="border-2 border-neon-blue px-8 py-3 rounded-full font-medium text-neon-blue hover:bg-neon-blue/10 transition-colors">
-                    Bog'lanish
+
+                <a href="https://t.me/sattorov_aliy" class="contact-item" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">Telegram</span>
+                        <span class="contact-value">@sattorov_aliy</span>
+                    </div>
+                </a>
+
+                <a href="tel:+998901234567" class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">Phone</span>
+                        <span class="contact-value">+998 95 188 45 65</span>
+                    </div>
+                </a>
+
+                <a href="mailto:sattorovalixon06@gmail.com" class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">sattorovalixon06@gmail.com</span>
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/_sattorov_ali" class="contact-item" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">Instagram</span>
+                        <span class="contact-value">@_sattorov_ali</span>
+                    </div>
+                </a>
+
+                <a href="https://youtube.com/@unofficial_phone" class="contact-item" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">YouTube</span>
+                        <span class="contact-value">@unofficial_phone</span>
+                    </div>
+                </a>
+
+                <a href="www.linkedin.com/in/alixon-sattorov-195470358" class="contact-item" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">LinkedIn</span>
+                        <span class="contact-value">Sattorov Alixon</span>
+                    </div>
+                </a>
+
+                <a href="https://twitter.com/sattorov_ali" class="contact-item" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-x-twitter"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">X Twitter</span>
+                        <span class="contact-value">@sattorov_ali</span>
+                    </div>
                 </a>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-
-    <section id="about" class="py-20 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center"
-                style="font-family: 'Poppins', sans-serif;">Men haqimda</h2>
-            <div class="flex flex-col md:flex-row gap-12 items-center">
-                <div class="md:w-1/3 flex justify-center">
-                    <div class="relative">
-                        <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-neon-purple/30 card-hover">
-                            <div
-                                class="bg-gradient-to-br from-neon-blue/20 to-neon-pink/20 w-full h-full flex items-center justify-center">
-                                <div class="bg-gray-800 w-56 h-56 rounded-full flex items-center justify-center">
-                                    <span class="text-5xl font-bold text-neon-blue flex items-center justify-center">
-                                        <img src="image/alixon.png" alt="Mening suratim"
-                                            class="w-56 h-56 rounded-full object-cover">
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-2/3">
-                    <h3 class="text-2xl font-bold mb-4" style="font-family: 'Poppins', sans-serif;">Frontend dasturchisi
-                        & Injiner</h3>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
-                        Men Sattorov Alixon 2 yildan ortiq tajribaga ega frontend dasturchisiman.
-                        Men sizga shaxsiy portfolio, onlayn do'kon, maktablar uchun maxsus saytlarni mukammal va
-                        zamonaviy dizaynda tayyorlab bera olaman.
-                    </p>
-                    <p class="text-gray-300 mb-8 leading-relaxed">
-                        Bundan tashqari men kompyuterlarga servis va dasturiy xizmat ko'rsata olaman.Telefonlarni
-                        programmalashtirish,
-                        root huquqlarini o'rnatish, sozlash, har xil modlarni o'rnata olaman va ta'mirlay olaman.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <div class="flex items-center">
-                            <div class="w-3 h-3 rounded-full bg-neon-blue mr-2"></div>
-                            <span>Frontend</span>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-3 h-3 rounded-full bg-neon-purple mr-2"></div>
-                            <span>Kompyuterlarga xizmat ko'rsatish</span>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-3 h-3 rounded-full bg-neon-pink mr-2"></div>
-                            <span>Telefonlarga dasturiy ta'minot ko'rsatish</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://t.me/yourusername" class="social-link" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="mailto:your.email@example.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-        </div>
-    </section>
-
-
-    <section id="skills" class="py-20 px-4 bg-dark/30">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center"
-                style="font-family: 'Poppins', sans-serif;">Ko'nikmalarim</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-                <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover">
-                    <h3 class="text-xl font-bold mb-6 text-neon-blue" style="font-family: 'Poppins', sans-serif;">
-                        Technical Expertise</h3>
-                    <div class="space-y-5">
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span>HTML</span>
-                                <span>95%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[95%]"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span>CSS</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[90%]"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span>Java script</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[85%]"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span>Python</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[80%]"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="bg-dark/50 p-6 rounded-xl border border-neon-purple/20 card-hover">
-                    <h3 class="text-xl font-bold mb-6 text-neon-purple" style="font-family: 'Poppins', sans-serif;">
-                        Dasturlar & Texnalogiyalar</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 bg-neon-blue/10 text-neon-blue rounded-full">VS Code</span>
-                        <span class="px-4 py-2 bg-neon-purple/10 text-neon-purple rounded-full">Python</span>
-                        <span class="px-4 py-2 bg-neon-pink/10 text-neon-pink rounded-full">My SQL</span>
-                        <span class="px-4 py-2 bg-neon-blue/10 text-neon-blue rounded-full">Open AI ChatGPT</span>
-                        <span class="px-4 py-2 bg-neon-purple/10 text-neon-purple rounded-full">GPT 5 </span>
-                        <span class="px-4 py-2 bg-neon-pink/10 text-neon-pink rounded-full">GitHub</span>
-                        <span class="px-4 py-2 bg-neon-blue/10 text-neon-blue rounded-full">Tailwind CSS</span>
-                        <span class="px-4 py-2 bg-neon-purple/10 text-neon-purple rounded-full">Figma</span>
-                        <span class="px-4 py-2 bg-neon-pink/10 text-neon-pink rounded-full">Canva</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center"
-                style="font-family: 'Poppins', sans-serif;">Loyihalarim</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="bg-dark/50 rounded-xl overflow-hidden border border-neon-blue/20 card-hover">
-                    <div class="h-48 overflow-hidden">
-                        <img src="image/xrom.png" alt="XROM Community" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">XROM Community</h3>
-                        <p class="text-gray-400 mb-4">XROM Community uchun tayyorlangan sayt demo versiyasi tez orada
-                            serverga qo'yiladi.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-neon-blue/10 text-neon-blue rounded">HTML</span>
-                            <span class="px-2 py-1 bg-neon-purple/10 text-neon-purple rounded">Tailwind CSS</span>
-                            <span class="px-2 py-1 bg-neon-pink/10 text-neon-pink rounded">JavaScript</span>
-                        </div>
-                        <a href="https://xrom.netlify.app/"
-                            class="text-neon-blue hover:text-neon-purple transition-colors flex items-center">
-                            Loyihani ko'rish
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-
-                <!-- Project 2 -->
-                <div class="bg-dark/50 rounded-xl overflow-hidden border border-neon-blue/20 card-hover">
-                    <div class="h-48 overflow-hidden">
-                        <img src="image/shpzone.png" alt="XROM Community" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Onlayn do'kon</h3>
-                        <p class="text-gray-400 mb-4">Buyurtma asosida tayyorlangan onlayn do'kon demo versiyasi</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-neon-blue/10 text-neon-blue rounded">HTML</span>
-                            <span class="px-2 py-1 bg-neon-purple/10 text-neon-purple rounded">Tailwind CSS</span>
-                            <span class="px-2 py-1 bg-neon-pink/10 text-neon-pink rounded">JavaScript</span>
-                        </div>
-                        <a href="https://shpzone.netlify.app/"
-                            class="text-neon-blue hover:text-neon-purple transition-colors flex items-center">
-                            Loyihani ko'rish
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-
-                 <div class="bg-dark/50 rounded-xl overflow-hidden border border-neon-blue/20 card-hover">
-                    <div class="h-48 overflow-hidden">
-                        <img src="image/edulytics.png" alt="XROM Community" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Edulytics</h3>
-                        <p class="text-gray-400 mb-4">O'quv markazlarni raqamlashtirishga qaratilgan platforma</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-neon-blue/10 text-neon-pink rounded">Tez kunda!!!</span>
-                        </div>
-                        <a href="https://t.me/edulytics"
-                            class="text-neon-blue hover:text-neon-purple transition-colors flex items-center">
-                            Loyihani ko'rish
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Certificates Section -->
-    <section id="certificates" class="py-20 px-4 bg-dark/30">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center"
-                style="font-family: 'Poppins', sans-serif;">Certifications</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Certificate 1 -->
-
-                <a href="https://coursera.org/verify/96ASISG3M2XG" target="_blank"
-                    class="block transition-transform hover:scale-105">
-                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                            <img src="certificate_image/University Virginia The Economics of AI.png"
-                                alt="The Economics of AI" class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">The Economics of AI</h3>
-                        <p class="text-gray-400 mb-4">University Virginia</p>
-                    </div>
-                </a>
-
-     <a href="https://t.me/prompt_ali/225" target="_blank"
-                    class="block transition-transform hover:scale-105">
-                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                            <img src="certificate_image/certificate agrobank.png"
-                                alt="Hacaton Agrobank" class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Hacaton AI500</h3>
-                        <p class="text-gray-400 mb-4">Agrobak hacaton</p>
-                    </div>
-                </a>
-                
-                <a href="https://coursera.org/verify/U0RNOV38MRX8" target="_blank"
-                    class="block transition-transform hover:scale-105">
-                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                            <img src="certificate_image/scrimba Build AI Apps with ChatGPT, Dall-E, and GPT-4.png"
-                                alt="The Economics of AI" class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">University of Colorado Boulder</h3>
-                        <p class="text-gray-400 mb-4">Communicating Effectively in Groups</p>
-                    </div>
-                </a>
-
-                
-
-                <!-- Certificate 2 -->
-                <a href="https://coursera.org/verify/3RFGSPBT4H6I" target="_blank"
-                    class="block transition-transform hover:scale-105">
-                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                            <img src="certificate_image/scrimba Build AI Apps with ChatGPT, Dall-E, and GPT-4.png"
-                                alt="The Economics of AI" class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Scrimba</h3>
-                        <p class="text-gray-400 mb-4">Build AI Apps with ChatGPT</p>
-                    </div>
-                </a>
-
-                <!-- Certificate 3 -->
-                <a href="https://coursera.org/verify/ODNGF6C9RBDA" target="_blank"
-                    class="block transition-transform hover:scale-105">
-                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                            <img src="certificate_image/certificat google sheets.png" alt="The Economics of AI"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Google</h3>
-                        <p class="text-gray-400 mb-4">Google Sheets</p>
-                    </div>
-                </a>
-
-                <!-- Certificate 4 -->
-                <a href="https://coursera.org/verify/NY98XMHCC3BP" target="_blank"
-                    class="block transition-transform hover:scale-105">
-                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                            <img src="certificate_image/certificat google gmail.png" alt="The Economics of AI"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Google</h3>
-                        <p class="text-gray-400 mb-4">Google Gmail</p>
-                    </div>
-                </a>
-
-                <!-- Certificate 5 -->
-                <a href="https://coursera.org/verify/SXJDFDFEFCL0" target="_blank"
-                    class="block transition-transform hover:scale-105">
-                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                            <img src="certificate_image/certificat google gemini.png" alt="The Economics of AI"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Google</h3>
-                        <p class="text-gray-400 mb-4">Google Gemini</p>
-                    </div>
-                </a>
-
-                <!-- Certificate 5 -->
-                <a href="https://coursera.org/verify/Z1VTH755S1FG" target="_blank"
-                    class="block transition-transform hover:scale-105">
-                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                            <img src="certificate_image/certificat google drive.png" alt="The Economics of AI"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Google</h3>
-                        <p class="text-gray-400 mb-4">Google Drive</p>
-                    </div>
-                </a>
-
-                <!-- Certificate 6 -->
-                <a href="https://coursera.org/verify/XC2LWY41LSRR" target="_blank"
-                    class="block transition-transform hover:scale-105">
-                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                            <img src="certificate_image/certificat google docs.png" alt="The Economics of AI"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Google</h3>
-                        <p class="text-gray-400 mb-4">Google Docs</p>
-                    </div>
-                </a>
-
-                <!-- Certificate 7 -->
-                <a href="https://coursera.org/verify/A1ORC0TNCAXA" target="_blank"
-                    class="block transition-transform hover:scale-105">
-                    <div class="bg-dark/50 p-6 rounded-xl border border-neon-blue/20 card-hover text-center">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                            <img src="certificate_image/certificat google calendar.png" alt="The Economics of AI"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Google</h3>
-                        <p class="text-gray-400 mb-4">Google Calendar</p>
-                    </div>
-                </a>
-
-            </div>
-        </div>
-    </section>
-
-
-    <section id="contact" class="py-20 px-4">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center"
-                style="font-family: 'Poppins', sans-serif;">Menga xabar qoldiring</h2>
-
-            <div class="bg-dark/50 p-8 rounded-xl border border-neon-blue/20">
-                <!-- ✅ FORM ACTION QO‘SHILDI -->
-                <form action="https://formspree.io/f/mwprnddl" method="POST" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="name" class="block mb-2 text-gray-300">Ism</label>
-                            <input type="text" id="name" name="name"
-                                class="w-full bg-dark/70 border border-neon-blue/30 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent transition"
-                                placeholder="Your name" required>
-                        </div>
-                        <div>
-                            <label for="email" class="block mb-2 text-gray-300">Email</label>
-                            <input type="email" id="email" name="email"
-                                class="w-full bg-dark/70 border border-neon-blue/30 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent transition"
-                                placeholder="your.email@example.com" required>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="subject" class="block mb-2 text-gray-300">Mavzu</label>
-                        <input type="text" id="subject" name="subject"
-                            class="w-full bg-dark/70 border border-neon-blue/30 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent transition"
-                            placeholder="Project inquiry">
-                    </div>
-
-                    <div>
-                        <label for="message" class="block mb-2 text-gray-300">Xabar</label>
-                        <textarea id="message" name="message" rows="5"
-                            class="w-full bg-dark/70 border border-neon-blue/30 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent transition"
-                            placeholder="Xabaringizni qoldiring..." required></textarea>
-                    </div>
-
-                    <button type="submit"
-                        class="gradient-btn w-full py-3 rounded-lg font-medium text-white shadow-lg hover:shadow-xl">
-                        Xabar jo'natish
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-
-
-    <footer class="py-10 px-4 border-t border-neon-blue/20">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">
-                        <span class="text-neon-blue">Sattorov </span><span class="text-neon-pink">ALI</span>
-                    </div>
-                    <p class="text-gray-500 mt-2">Muhim raqamli tajribalarni yaratish</p>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="https://t.me/Syntax_Ali" class="social-icon text-neon-blue">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M9.999 15.2l-.398 5.6c.568 0 .815-.244 1.109-.535l2.66-2.523 5.518 4.016c1.012.557 1.732.263 1.993-.94l3.613-16.94.002-.001c.319-1.493-.537-2.08-1.527-1.716l-21.333 8.23c-1.453.566-1.433 1.38-.248 1.742l5.45 1.7 12.647-7.963c.595-.36 1.14-.162.692.198l-10.879 9.136z" />
-                        </svg>
-                    </a>
-                    <a href="https://instagram.com/_sattorov_ali" class="social-icon text-neon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.333 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.069 1.646.069 4.851s-.011 3.584-.069 4.85c-.062 1.366-.333 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.069-4.85.069s-3.584-.011-4.85-.069c-1.366-.062-2.633-.333-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.333-2.633 1.308-3.608C4.516 2.566 5.783 2.295 7.15 2.233 8.416 2.175 8.796 2.163 12 2.163zm0 1.838c-3.162 0-3.532.011-4.778.069-1.077.049-1.668.229-2.059.382-.519.202-.888.444-1.277.833-.389.389-.631.758-.833 1.277-.153.391-.333.982-.382 2.059-.058 1.246-.069 1.616-.069 4.778s.011 3.532.069 4.778c.049 1.077.229 1.668.382 2.059.202.519.444.888.833 1.277.389.389.758.631 1.277.833.391.153.982.333 2.059.382 1.246.058 1.616.069 4.778.069s3.532-.011 4.778-.069c1.077-.049 1.668-.229 2.059-.382.519-.202.888-.444 1.277-.833.389-.389.631-.758.833-1.277.153-.391.333-.982.382-2.059.058-1.246.069-1.616.069-4.778s-.011-3.532-.069-4.778c-.049-1.077-.229-1.668-.382-2.059a3.554 3.554 0 0 0-.833-1.277 3.554 3.554 0 0 0-1.277-.833c-.391-.153-.982-.333-2.059-.382-1.246-.058-1.616-.069-4.778-.069zm0 3.905a5.932 5.932 0 1 1 0 11.865 5.932 5.932 0 0 1 0-11.865zm0 9.79a3.858 3.858 0 1 0 0-7.716 3.858 3.858 0 0 0 0 7.716zm6.406-10.845a1.386 1.386 0 1 1 0-2.772 1.386 1.386 0 0 1 0 2.772z" />
-                        </svg>
-                    </a>
-                    <a href="https://github.com/alisattorov06" class="social-icon text-neon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.034-1.416-4.034-1.416-.546-1.387-1.334-1.756-1.334-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.493.997.108-.775.418-1.305.762-1.604-2.666-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 0 1 6.002 0c2.293-1.552 3.301-1.23 3.301-1.23.653 1.653.241 2.874.118 3.176.77.84 1.236 1.911 1.236 3.221 0 4.609-2.804 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 22.092 24 17.594 24 12.297c0-6.627-5.373-12-12-12z" />
-                        </svg>
-                    </a>
-                    <a href="https://youtube.com/@unofficial_phone" class="social-icon text-neon-red">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M23.499 6.203a2.998 2.998 0 0 0-2.113-2.118C19.548 3.5 12 3.5 12 3.5s-7.548 0-9.386.585A2.998 2.998 0 0 0 .5 6.203 31.991 31.991 0 0 0 0 12a31.991 31.991 0 0 0 .5 5.797 2.998 2.998 0 0 0 2.114 2.118C4.452 20.5 12 20.5 12 20.5s7.548 0 9.386-.585a2.998 2.998 0 0 0 2.113-2.118A31.991 31.991 0 0 0 24 12a31.991 31.991 0 0 0-.501-5.797zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                        </svg>
-                    </a>
-                </div>
-
-            </div>
-            <div class="mt-10 text-center text-gray-500 text-sm">
-                <p>© 2025. Sattorov ALI| Barcha huquqlar himoyalangan.</p>
-            </div>
+            <p class="footer-text">
+                © 2026 Portfolio. Crafted with precision and passion.
+            </p>
         </div>
     </footer>
 
     <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            if (window.VANTA) {
-                VANTA.WAVES({
-                    el: "#vanta-bg",
-                    mouseControls: true,
-                    touchControls: true,
-                    gyroControls: false,
-                    minHeight: 200.00,
-                    minWidth: 200.00,
-                    scale: 1.00,
-                    scaleMobile: 1.00,
-                    color: 0x0f0f1b,
-                    shininess: 20.00,
-                    waveHeight: 20.00,
-                    waveSpeed: 1.00
-                });
-            }
+        // Glow effect follows cursor
+        const glowEffect = document.getElementById('glowEffect');
+        document.addEventListener('mousemove', (e) => {
+            glowEffect.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
+        });
 
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            });
-
-            const menuToggle = document.getElementById('menu-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            menuToggle.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        window.scrollTo({
-                            top: target.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-
-                        mobileMenu.classList.add('hidden');
-                    }
-                });
             });
         });
 
+        // Active section tracking on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navPills = document.querySelectorAll('.nav-pill');
 
+        function updateActiveNav() {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navPills.forEach(pill => {
+                pill.classList.remove('active');
+                if (pill.getAttribute('data-section') === current) {
+                    pill.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav(); // Initial call
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.glass-card, .project-card, .stat-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
     </script>
 </body>
 
 </html>
-
-
-
-
-
-
