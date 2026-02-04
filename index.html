@@ -36,7 +36,6 @@
             line-height: 1.6;
         }
 
-        /* Animated space background */
         .space-bg {
             position: fixed;
             top: 0;
@@ -79,7 +78,6 @@
             }
         }
 
-        /* Floating capsule header */
         header {
             position: fixed;
             top: 2rem;
@@ -201,14 +199,12 @@
             color: var(--text-primary);
         }
 
-        /* Main content */
         main {
             max-width: 1200px;
             margin: 0 auto;
             padding: 12rem 2rem 4rem;
         }
 
-        /* Hero section */
         .hero {
             margin-bottom: 8rem;
             animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
@@ -243,7 +239,6 @@
             }
         }
 
-        /* Avatar */
         .avatar-container {
             margin-bottom: 0;
             display: flex;
@@ -326,7 +321,6 @@
             }
         }
 
-        /* Personal Info Section */
         .personal-info {
             max-width: 800px;
             margin: 6rem auto;
@@ -468,7 +462,6 @@
             box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
         }
 
-        /* Glass cards section */
         .section {
             margin-bottom: 6rem;
         }
@@ -596,7 +589,6 @@
             z-index: 1;
         }
 
-        /* Projects section */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -660,7 +652,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* ENG MUHIM */
             display: block;
         }
 
@@ -716,7 +707,6 @@
             gap: 0.75rem;
         }
 
-        /* Stats section */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -780,7 +770,6 @@
             font-size: 0.95rem;
         }
 
-        /* Contact Section */
         .contact-section {
             max-width: 800px;
             margin: 0 auto;
@@ -868,7 +857,6 @@
             color: var(--text-primary);
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 4rem 2rem;
@@ -916,7 +904,6 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive */
         @media (max-width: 1024px) {
             .projects-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1006,7 +993,6 @@
                 padding: 2rem 1.5rem 8rem;
             }
 
-            /* Hero mobile - stack vertically */
             .hero-content {
                 flex-direction: column;
                 gap: 2rem;
@@ -1111,7 +1097,6 @@
             }
         }
 
-        /* Glow effect on scroll */
         .glow-effect {
             position: fixed;
             width: 600px;
@@ -1121,6 +1106,38 @@
             pointer-events: none;
             transition: transform 0.2s ease-out;
             z-index: -1;
+        }
+
+        .nav-liquid-indicator {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 42px;
+            border-radius: 999px;
+            pointer-events: none;
+
+            background: linear-gradient(135deg,
+                    rgba(0, 212, 255, 0.35),
+                    rgba(179, 102, 255, 0.35));
+
+            backdrop-filter: blur(18px) saturate(200%);
+            -webkit-backdrop-filter: blur(18px) saturate(200%);
+
+            box-shadow:
+                0 8px 30px rgba(0, 212, 255, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.45);
+
+            transform: translateY(-50%);
+            z-index: 0;
+
+            transition:
+                left 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                width 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .nav-pill {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -1546,7 +1563,6 @@
     </footer>
 
     <script>
-        // Generate stars
         const starsContainer = document.getElementById('stars');
         for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
@@ -1559,13 +1575,11 @@
             starsContainer.appendChild(star);
         }
 
-        // Glow effect follows cursor
         const glowEffect = document.getElementById('glowEffect');
         document.addEventListener('mousemove', (e) => {
             glowEffect.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
         });
 
-        // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1576,7 +1590,6 @@
             });
         });
 
-        // Active section tracking on scroll
         const sections = document.querySelectorAll('section[id]');
         const navPills = document.querySelectorAll('.nav-pill');
 
@@ -1601,9 +1614,8 @@
         }
 
         window.addEventListener('scroll', updateActiveNav);
-        updateActiveNav(); // Initial call
+        updateActiveNav();
 
-        // Intersection Observer for scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -1618,12 +1630,39 @@
             });
         }, observerOptions);
 
-        // Observe all cards
         document.querySelectorAll('.glass-card, .project-card, .stat-card').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(30px)';
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(card);
+        });
+        const nav = document.querySelector('nav');
+        const pills = document.querySelectorAll('.nav-pill');
+
+        const indicator = document.createElement('div');
+        indicator.className = 'nav-liquid-indicator';
+        nav.style.position = 'relative';
+        nav.prepend(indicator);
+
+        function moveLiquidIndicator(target) {
+            const pillRect = target.getBoundingClientRect();
+            const navRect = nav.getBoundingClientRect();
+
+            indicator.style.width = pillRect.width + 'px';
+            indicator.style.left = (pillRect.left - navRect.left) + 'px';
+        }
+
+        window.addEventListener('load', () => {
+            const active = document.querySelector('.nav-pill.active');
+            if (active) moveLiquidIndicator(active);
+        });
+
+        pills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                pills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                moveLiquidIndicator(pill);
+            });
         });
     </script>
 </body>
