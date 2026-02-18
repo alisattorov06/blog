@@ -133,16 +133,3 @@ To deploy manually:
 
 This project is personal portfolio code.
 Not intended for redistribution without permission.
-
----
-
-If you want, I can also generate:
-
-* Advanced README with badges
-* Animated GIF preview section
-* GitHub stats integration
-* Shields.io tech badges
-* Clean minimalist version
-* Enterprise-style professional version
-
-Qaysi format kerak?
